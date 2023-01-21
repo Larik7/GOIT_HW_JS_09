@@ -11,16 +11,19 @@ function changeBodyBgColor() {
 }
 
 function switchButtonsDisabled() {
-  btnStart.toggleAttribute('disabled');
-  btnStop.toggleAttribute('disabled');
+  startBtn.toggleAttribute('disabled');
+  stopBtn.toggleAttribute('disabled');
 }
 
-startBtn.addEventListener("click", () => {     
-    timerId = setInterval(changeBodyBgColor, 1000);
-    switchButtonsDisabled();
+startBtn.addEventListener("click", () => {
+  changeBodyBgColor();
+  timerId = setInterval(changeBodyBgColor, 1000);
+  startBtn.toggleAttribute('disabled');
 });
 
 stopBtn.addEventListener("click", () => {
-  clearInterval(timerId);
-  switchButtonsDisabled();
+  if (timerId) {
+    clearInterval(timerId);
+    stopBtn.toggleAttribute('disabled');
+  }
 });
