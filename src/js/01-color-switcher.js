@@ -18,12 +18,10 @@ function switchButtonsDisabled() {
 startBtn.addEventListener("click", () => {
   changeBodyBgColor();
   timerId = setInterval(changeBodyBgColor, 1000);
-  startBtn.toggleAttribute('disabled');
+  switchButtonsDisabled();
 });
 
 stopBtn.addEventListener("click", () => {
-  if (timerId) {
-    clearInterval(timerId);
-    stopBtn.toggleAttribute('disabled');
-  }
+  clearInterval(timerId);
+  switchButtonsDisabled();
 });
