@@ -15,13 +15,30 @@ function switchButtonsDisabled() {
   stopBtn.toggleAttribute('disabled');
 }
 
-startBtn.addEventListener("click", () => {
+function onStart() {
   changeBodyBgColor();
   timerId = setInterval(changeBodyBgColor, 1000);
   switchButtonsDisabled();
-});
+}
 
-stopBtn.addEventListener("click", () => {
-  clearInterval(timerId);
-  switchButtonsDisabled();
-});
+function onStop() {
+  if (timerId) {
+    clearInterval(timerId);
+    switchButtonsDisabled();
+  }
+}
+
+function doTask() {
+
+  if (!startBtn || !stopBtn) {
+    console.log('Error: invalid markup!');
+    return;
+  }
+
+  startBtn.addEventListener('click', onStart);
+  stopBtn.addEventListener('click', onStop);
+  
+  stopBtn.toggleAttribute('disabled', true);
+}
+
+doTask();
